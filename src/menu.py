@@ -1,7 +1,8 @@
 import pygame
 import logging
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.CRITICAL)
+#logging.disable()
 
 class MenuSecondary:
     menu_open = False
@@ -19,6 +20,9 @@ class MenuSecondary:
         font = pygame.font.SysFont('Arial', 24)
         settings_text = font.render("Settings", True, (255, 255, 255))
         screen.blit(settings_text, (menu_x + 20, 100))
+
+        restart_text = font.render("Restart Game", True, (255, 255, 255))
+        screen.blit(restart_text, (menu_x + 20, 300))
 
         save_text = font.render("Save Changes and Exit", True, (255, 255, 255))
         screen.blit(save_text, (menu_x + 20, 150))
@@ -42,20 +46,36 @@ class MenuSecondary:
 
     def handleMouseClick(self, pos):
         button_x = self.menu_x + 20
-        button_y = 150
+        button_y = 150  # This is the position for the first button ("Save Changes and Exit")
         button_width = 250
         button_height = 30
-    
+        
+        # "Save Changes and Exit" button bounds
         if button_x <= pos[0] <= button_x + button_width and button_y <= pos[1] <= button_y + button_height:
             logging.debug("Save Changes and Exit clicked")
             self.menu_open = False
 
+        # "Restart Game" button bounds (adjusting the position)
+        restart_button_y = 300  # Position for the "Restart Game" button
+        if button_x <= pos[0] <= button_x + button_width and restart_button_y <= pos[1] <= restart_button_y + button_height:
+            logging.critical("Restart Game clicked")
+            self.restartGame()
+
+    def restartGame(self):
+        logging.critical("Restart game")
+
+        self.menu_open = False
+        self.menu_x = -1000
+
+        # Additional restart logic can go here
+
+
     def gameLoop(self, screen, clock, menu_icon):
         running = True
-        background_image = self.loadMenuBackground()  # Load the menu background only once
+        background_image = self.loadMenuBackground()
         
         while running:
-            screen.fill((0, 0, 0))  # Fill the screen with black (clear the screen)
+            screen.fill((0, 0, 0))
             
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -70,7 +90,7 @@ class MenuSecondary:
             self.drawMenuIcon(screen, menu_icon)
 
             if self.menu_open:
-                self.drawMenu(screen, self.menu_x, background_image)  # Draw the menu when open
+                self.drawMenu(screen, self.menu_x, background_image)
             else:
                 self.drawMenu(screen, self.menu_x, background_image)  # Draw background shifting when closing
 
