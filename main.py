@@ -29,11 +29,11 @@ while run:
             if event.button == 4:
                 player.zoom += zoom
                 zoom += (zoomIncrement)
-                zoomIncrement += (zoomIncrement * 0.4)
+                zoomIncrement += (zoomIncrement * 0.1)
             elif event.button == 5:
                 player.zoom -= zoom
                 zoom -= zoomIncrement
-                zoomIncrement -= (zoomIncrement * 0.4)
+                zoomIncrement += (zoomIncrement * 0.1)
 
         elif event.type == pygame.MOUSEBUTTONUP:
             if event.button == 2:
