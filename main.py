@@ -1,7 +1,12 @@
+<<<<<<< HEAD
 from src import Settings
 import pygame, logging
 
 logging.basicConfig(level=logging.DEBUG)
+=======
+from src import *
+import pygame
+>>>>>>> 9a021f30366c5bdc69c4a29fc333b07421d612e7
 
 settings = Settings()
 
@@ -11,11 +16,55 @@ else:
     screen = pygame.display.set_mode((settings.settings["width"], settings.settings["height"]))
 
 pygame.display.set_caption("Save the Animals!!!") 
-run = True
 
+player = Player(screen)
+map = Map(screen, player)
+zoom = 0.1
+run = True
+scroll = False
 while run: 
     for event in pygame.event.get(): 
-        if event.type == pygame.QUIT: 
+        if event.type == pygame.QUIT:
             run = False
+
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 2:
+                scroll = True
+            if event.button == 4:
+                player.zoom += zoom
+                zoom += (zoom * 0.5)
+            elif event.button == 5:
+                player.zoom -= zoom
+                zoom += (zoom * 0.5)
+
+        elif event.type == pygame.MOUSEBUTTONUP:
+            if event.button == 2:
+                scroll = False
+                zoom = 0.1
+
+        elif event.type == pygame.MOUSEMOTION:
+            if scroll:
+                rel_x, rel_y = event.rel
+
+                player.x -= rel_x
+                player.y -= rel_y
+
+    if player.x < 0:
+        player.x = 0
+    
+    if player.x > player.width:
+        player.x = player.width
+
+    if player.y < 0:
+        player.y = 0
+    
+    if player.y > player.height:
+        player.y = player.height
+                    
+    screen.fill((0, 105, 170))
+    map.render()
+
+    pygame.display.flip()
+
 
 
