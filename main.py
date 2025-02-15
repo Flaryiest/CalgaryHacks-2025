@@ -1,12 +1,7 @@
-<<<<<<< HEAD
 from src import Settings
 import pygame, logging
 
 logging.basicConfig(level=logging.DEBUG)
-=======
-from src import *
-import pygame
->>>>>>> 9a021f30366c5bdc69c4a29fc333b07421d612e7
 
 settings = Settings()
 
@@ -20,6 +15,7 @@ pygame.display.set_caption("Save the Animals!!!")
 player = Player(screen)
 map = Map(screen, player)
 zoom = 0.1
+zoomIncrement = 0.1
 run = True
 scroll = False
 while run: 
@@ -31,16 +27,18 @@ while run:
             if event.button == 2:
                 scroll = True
             if event.button == 4:
-                if player.zoom <= 5:
-                    player.zoom += zoom
+                player.zoom += zoom
+                zoom += (zoomIncrement)
+                zoomIncrement += (zoomIncrement * 0.4)
             elif event.button == 5:
-                if player.zoom >= 1:
-                    player.zoom -= zoom
+                player.zoom -= zoom
+                zoom -= zoomIncrement
+                zoomIncrement -= (zoomIncrement * 0.4)
 
         elif event.type == pygame.MOUSEBUTTONUP:
             if event.button == 2:
                 scroll = False
-                zoom = 0.1
+                zoomIncrement = 0.1
 
         elif event.type == pygame.MOUSEMOTION:
             if scroll:
