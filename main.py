@@ -28,14 +28,14 @@ while run:
             if event.button == 4:
                 for i in range(0, 10):
                     player.zoom += zoom/10
-                    pygame.time.delay(20)
+                    pygame.time.delay(5)
                
                 zoom += (zoomIncrement)
                 zoomIncrement += (zoomIncrement * 0.1)
             elif event.button == 5:
                 for i in range(0, 10):
                     player.zoom -= zoom/10
-                    pygame.time.delay(20)
+                    pygame.time.delay(5)
                 zoom += zoomIncrement
                 zoomIncrement += (zoomIncrement * 0.1)
 
