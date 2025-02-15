@@ -24,15 +24,16 @@ while run:
             if event.button == 2:
                 scroll = True
             if event.button == 4:
-                if player.zoom <= 5:
-                    player.zoom += zoom
+                player.zoom += zoom
+                zoom += (zoom * 0.5)
             elif event.button == 5:
-                if player.zoom >= 1:
-                    player.zoom -= zoom
+                player.zoom -= zoom
+                zoom += (zoom * 0.5)
 
         elif event.type == pygame.MOUSEBUTTONUP:
             if event.button == 2:
                 scroll = False
+                zoom = 0.1
 
         elif event.type == pygame.MOUSEMOTION:
             if scroll:
