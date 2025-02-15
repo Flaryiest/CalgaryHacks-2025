@@ -1,5 +1,5 @@
 from src import *
-import pygame, logging
+import pygame, logging, random
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -17,6 +17,9 @@ map = Map(screen, player)
 zoom = 0.1
 run = True
 scroll = False
+
+plants = [Plant(player, screen, random.randint(0, 1920), random.randint(0, 1080)) for i in range(0, 10)]
+
 while run: 
     for event in pygame.event.get(): 
         if event.type == pygame.QUIT:
@@ -26,18 +29,11 @@ while run:
             if event.button == 2:
                 scroll = True
             if event.button == 4:
-                for i in range(0, 10):
-                    player.zoom += zoom/10
-                    pygame.time.delay(20)
+                player.zoom += zoom
                
-                zoom += (zoomIncrement)
-                zoomIncrement += (zoomIncrement * 0.1)
             elif event.button == 5:
-                for i in range(0, 10):
-                    player.zoom -= zoom/10
-                    pygame.time.delay(20)
-                zoom += zoomIncrement
-                zoomIncrement += (zoomIncrement * 0.1)
+                player.zoom -= zoom
+
 
         elif event.type == pygame.MOUSEBUTTONUP:
             if event.button == 2:
@@ -65,6 +61,11 @@ while run:
                     
     screen.fill((0, 105, 170))
     map.render()
+
+    for plant in plants:
+        if plant.rect.collidepoint(pygame.mouse.get_pos()):
+            print(random.randint(0, 100))
+        plant.render()
 
     pygame.display.flip()
 

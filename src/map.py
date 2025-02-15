@@ -7,10 +7,10 @@ class Map:
 
         self.width, self.height = pygame.display.get_surface().get_size()
 
-        self.map = pygame.image.load("assets\\map.png")
-        self.map = pygame.transform.scale(self.map, (self.width, self.height))
+        self.image = pygame.image.load("assets\\map.png")
+        self.image = pygame.transform.scale(self.image, (self.width, self.height))
         
-        self.rect = self.map.get_rect()
+        self.rect = self.image.get_rect()
         self.screen = screen
         self.player = player
 
@@ -23,7 +23,7 @@ class Map:
         try:
             scaled_map = self.cache[(width, height)]
         except KeyError:
-            scaled_map = pygame.transform.scale(self.map, (width, height))
+            scaled_map = pygame.transform.scale(self.image, (width, height))
             self.cache[(width, height)] = scaled_map
 
         offset_x = (self.width // 2) - (self.player.x * self.player.zoom)

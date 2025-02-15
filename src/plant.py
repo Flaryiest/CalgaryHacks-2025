@@ -5,21 +5,19 @@ class Plant:
         self.player = player
         self.screen = screen
 
-        self.image = pygame.image.load()
-
+        self.image = pygame.image.load("assets\\factory.png")
+        self.image = pygame.transform.scale(self.image, (100, 100))
+        self.width, self.height = pygame.display.get_surface().get_size()
+        self.rect = self.image.get_rect()
         self.x, self.y = x, y
     
     def render(self):
-        width = int(self.rect.width * self.player.zoom)
-        height = int(self.rect.height * self.player.zoom)
-        
-        try:
-            scaled_map = self.cache[(width, height)]
-        except KeyError:
-            scaled_map = pygame.transform.scale(self.image, (width, height))
-            self.cache[(width, height)] = scaled_map
-
         offset_x = (self.width // 2) - (self.player.x * self.player.zoom)
         offset_y = (self.height // 2) - (self.player.y * self.player.zoom)
 
-        self.screen.blit(scaled_map, (offset_x, offset_y))
+        zoomed_x = (self.x * self.player.zoom) + offset_x
+        zoomed_y = (self.y * self.player.zoom) + offset_y
+
+        scaled_image = pygame.transform.scale(self.image, (int(100 * self.player.zoom // 2), int(100 * self.player.zoom // 2)))
+
+        self.screen.blit(scaled_image, (zoomed_x, zoomed_y))
