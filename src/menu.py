@@ -25,7 +25,7 @@ class MenuSecondary:
 
     def drawMenu(self, screen, menu_x, background_image):
         logging.debug("MenuSecondary selected")
-        screen.blit(background_image, (menu_x, 0))
+        screen.blit(background_image, (menu_x, 0))  # Draw the background at the updated menu_x position
         self.drawMenuOptions(screen, menu_x)
 
     def menuToggle(self):
@@ -35,11 +35,10 @@ class MenuSecondary:
             if self.menu_x > 0:
                 self.menu_x = 0  # Stop at 0, meaning the menu is fully open
         elif not self.menu_open:
-            self.menu_x -= 30  # Move menu left when closed
+            self.menu_x -= 30  # Move menu left when closing
             if self.menu_x < -1000:
                 self.menu_x = -1000  # Stop at -1000, meaning the menu is fully closed
         logging.debug(f"Menu x after toggle: {self.menu_x}")
-
 
     def handleMouseClick(self, pos):
         button_x = self.menu_x + 20
@@ -53,8 +52,11 @@ class MenuSecondary:
 
     def gameLoop(self, screen, clock, menu_icon):
         running = True
-        background_image = self.loadMenuBackground()
+        background_image = self.loadMenuBackground()  # Load the menu background only once
+        
         while running:
+            screen.fill((0, 0, 0))  # Fill the screen with black (clear the screen)
+            
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
@@ -68,7 +70,9 @@ class MenuSecondary:
             self.drawMenuIcon(screen, menu_icon)
 
             if self.menu_open:
-                self.drawMenu(screen, self.menu_x, background_image)
+                self.drawMenu(screen, self.menu_x, background_image)  # Draw the menu when open
+            else:
+                self.drawMenu(screen, self.menu_x, background_image)  # Draw background shifting when closing
 
             pygame.display.flip()  # Update the screen
             clock.tick(30)  # Limit the frame rate to 30 FPS
@@ -80,7 +84,6 @@ clock = pygame.time.Clock()
 
 menu_icon = pygame.image.load("assets/menu assets/MenuSecondary.jpg")
 menu_icon = pygame.transform.scale(menu_icon, (50, 50))
-
 
 menu = MenuSecondary()
 menu.gameLoop(screen, clock, menu_icon)
