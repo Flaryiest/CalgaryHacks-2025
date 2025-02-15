@@ -1,9 +1,14 @@
-from src import Screen, Settings
+from src import Settings
 import pygame
 
-screen = Screen()
-setting = Settings()
+settings = Settings()
 
+if settings.settings["fullscreen"] == True:
+    screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+else:
+    screen = pygame.display.set_mode((settings.settings["width"], settings.settings["height"]))
+
+pygame.display.set_caption("Save the Animals!!!") 
 run = True
 
 while run: 
