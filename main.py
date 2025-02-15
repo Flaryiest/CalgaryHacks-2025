@@ -1,5 +1,7 @@
 from src import Settings
-import pygame
+import pygame, logging
+
+logging.basicConfig(level=logging.DEBUG)
 
 settings = Settings()
 
