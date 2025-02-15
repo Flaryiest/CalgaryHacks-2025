@@ -7,7 +7,7 @@ class Map:
 
         self.width, self.height = pygame.display.get_surface().get_size()
 
-        self.map = pygame.image.load("assets\\map.png")
+        self.map = pygame.image.load("../Assets/map.png")
         self.map = pygame.transform.scale(self.map, (self.width, self.height))
         
         self.rect = self.map.get_rect()
