@@ -1,4 +1,4 @@
-from src import Settings
+from src import *
 import pygame, logging
 
 logging.basicConfig(level=logging.DEBUG)
@@ -15,7 +15,6 @@ pygame.display.set_caption("Save the Animals!!!")
 player = Player(screen)
 map = Map(screen, player)
 zoom = 0.1
-zoomIncrement = 0.1
 run = True
 scroll = False
 while run: 
