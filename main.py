@@ -1,5 +1,7 @@
-from src import *
-import pygame
+from src import Settings
+import pygame, logging
+
+logging.basicConfig(level=logging.DEBUG)
 
 settings = Settings()
 
@@ -41,10 +43,23 @@ while run:
         elif event.type == pygame.MOUSEMOTION:
             if scroll:
                 rel_x, rel_y = event.rel
+
                 player.x -= rel_x
                 player.y -= rel_y
+
+    if player.x < 0:
+        player.x = 0
     
-    screen.fill((0, 0, 0))
+    if player.x > player.width:
+        player.x = player.width
+
+    if player.y < 0:
+        player.y = 0
+    
+    if player.y > player.height:
+        player.y = player.height
+                    
+    screen.fill((0, 105, 170))
     map.render()
 
     pygame.display.flip()
