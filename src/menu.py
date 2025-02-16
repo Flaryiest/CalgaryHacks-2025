@@ -2,11 +2,11 @@ import pygame
 import logging
 
 logging.basicConfig(level=logging.CRITICAL)
-#logging.disable()
 
 class MenuSecondary:
     menu_open = False
     menu_x = -1000
+    volume = 0.5
 
     def loadMenuBackground(self):
         background = pygame.image.load("assets/menu assets/MenuSecondaryBackground.jpg")
@@ -17,12 +17,17 @@ class MenuSecondary:
         screen.blit(icon, (730, 20))
 
     def drawMenuOptions(self, screen, menu_x):
-        font = pygame.font.SysFont('Arial', 24)
+        font = pygame.font.SysFont("assets/Fonts/TepidTerminal.ttf", 24)
         settings_text = font.render("Settings", True, (255, 255, 255))
         screen.blit(settings_text, (menu_x + 20, 100))
 
+        restart_button = pygame.transform.scale(pygame.image.load("assets/menu assets/Green restart button, Unpressed.png"), (30, 30))
         restart_text = font.render("Restart Game", True, (255, 255, 255))
         screen.blit(restart_text, (menu_x + 20, 300))
+        screen.blit(restart_button, (menu_x+60, 320))
+
+        volume_text = font.render(f"Volume: {int(self.volume * 100)}%", True, (255, 255, 255))
+        screen.blit(volume_text, (menu_x + 20, 400))
 
         save_text = font.render("Save Changes and Exit", True, (255, 255, 255))
         screen.blit(save_text, (menu_x + 20, 150))
@@ -57,9 +62,17 @@ class MenuSecondary:
 
         # "Restart Game" button bounds (adjusting the position)
         restart_button_y = 300  # Position for the "Restart Game" button
-        if button_x <= pos[0] <= button_x + button_width and restart_button_y <= pos[1] <= restart_button_y + button_height:
+        if button_x <= pos[0] <= button_x + button_width and restart_button_y <= pos[1] <= restart_button_y + button_height+20:
             logging.critical("Restart Game clicked")
             self.restartGame()
+
+        if button_x <= pos[0] <= button_x + 250 and 450 <= pos[1] <= 460:
+            new_volume = (pos[0] - button_x) / 250  # Calculate new volume
+            self.setVolume(new_volume)
+
+    def setVolume(self, volume):
+        self.volume = max(0, min(volume, 1))
+        pygame.mixer.music.set_volume(self.volume)
 
     def restartGame(self):
         logging.critical("Restart game")
@@ -69,10 +82,11 @@ class MenuSecondary:
 
         # Additional restart logic can go here
 
-
-    def gameLoop(self, screen, clock, menu_icon):
+    def gameLoop(self, screen, clock, menu_icon_pressed, menu_icon_notpressed):
         running = True
         background_image = self.loadMenuBackground()
+
+        pygame.mixer.music.set_volume(self.volume)
         
         while running:
             screen.fill((0, 0, 0))
@@ -81,12 +95,15 @@ class MenuSecondary:
                 if event.type == pygame.QUIT:
                     running = False
                 elif event.type == pygame.MOUSEBUTTONDOWN:
-                    if menu_icon.get_rect(topleft=(730, 20)).collidepoint(event.pos):
+                    if menu_icon_notpressed.get_rect(topleft=(730, 20)).collidepoint(event.pos) or menu_icon_pressed.get_rect(topleft=(730, 20)).collidepoint(event.pos):
                         self.menu_open = not self.menu_open
                     if self.menu_open:
                         self.handleMouseClick(event.pos) 
 
             self.menuToggle()
+
+            # Choose the appropriate icon based on the menu state (open or closed)
+            menu_icon = menu_icon_pressed if self.menu_open else menu_icon_notpressed
             self.drawMenuIcon(screen, menu_icon)
 
             if self.menu_open:
@@ -102,8 +119,10 @@ pygame.init()
 screen = pygame.display.set_mode((800, 600))
 clock = pygame.time.Clock()
 
-menu_icon = pygame.image.load("assets/menu assets/MenuSecondary.jpg")
-menu_icon = pygame.transform.scale(menu_icon, (50, 50))
+menu_icon_pressed = pygame.image.load("assets/menu assets/Button 1, Pressed.png")
+menu_icon_pressed = pygame.transform.scale(menu_icon_pressed, (50, 50))
+menu_icon_notpressed = pygame.image.load("assets/menu assets/Button 1, Unpressed.png")
+menu_icon_notpressed = pygame.transform.scale(menu_icon_notpressed, (50, 50))
 
 menu = MenuSecondary()
-menu.gameLoop(screen, clock, menu_icon)
+menu.gameLoop(screen, clock, menu_icon_pressed, menu_icon_notpressed)
