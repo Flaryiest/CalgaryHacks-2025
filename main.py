@@ -1,6 +1,7 @@
 from src import *
 import pygame, logging, random, time, json
 import pygame.freetype
+from pygame import mixer 
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -36,11 +37,17 @@ hover = {"status": False, "obj": None}
 dialogue = pygame.image.load("assets\\dialogue.png")
 dialogue = pygame.transform.scale(dialogue, (1500, 1000))
 pygame.font.init()
-font = pygame.font.SysFont('Comic Sans MS', 30)
+font = pygame.font.Font('assets\\Fonts\\TepidTerminalFont_v231106\\TepidTerminal.ttf', 32)
 overlay = pygame.Surface((1920, 1080), pygame.SRCALPHA)  # Enable per-pixel alpha
 overlay.fill((0, 0, 0, 128)) 
 button = pygame.image.load("assets\\button.png")
 button = pygame.transform.scale(button, (800, 200))
+
+mixer.init() 
+mixer.music.load("audio\\music.mp3") 
+mixer.music.set_volume(0.5) 
+  
+mixer.music.play(-1) 
 
 def fade_in():
 
@@ -62,6 +69,39 @@ def fade_in():
             break
 
 fade_in()
+start_button = pygame.Rect(1920 // 2 - 300, 600, button.get_width(), button.get_height())  # Button 1
+start_button_text = font.render("START SAVING ANIMALS!!!", True, (0, 0, 0))
+start = True
+while start:
+    for event in pygame.event.get(): 
+        if event.type == pygame.QUIT:
+            run = False
+
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button in [1, 2]:
+                if event.button == 1:
+                    for plant in plants:
+                        if start_button.collidepoint(pygame.mouse.get_pos()):
+                            start = False
+
+    screen.blit(button, start_button.topleft)                          
+    screen.blit(start_button_text, (start_button.x + 150, start_button.y + 75))
+    
+    pygame.display.flip()
+
+
+for i in range(0, 9):
+    back = pygame.image.load(f"assets\\{i}.png")
+    back = pygame.transform.scale(back, (1920, 1080))
+    t = time.time()
+    while time.time() - t < 3:
+        for event in pygame.event.get(): 
+            if event.type == pygame.QUIT:
+                run = False
+        screen.blit(back, (0, 0))
+        pygame.display.update()
+
+
 button_rect1 = pygame.Rect(100, 600, button.get_width(), button.get_height())  # Button 1
 button_rect2 = pygame.Rect(100, 800, button.get_width(), button.get_height())  # Button 2
 button_rect3 = pygame.Rect(850, 600, button.get_width(), button.get_height())  # Button 3
@@ -108,7 +148,7 @@ while run:
 
                             pygame.display.flip()
 
-                            time.sleep(3)
+                            time.sleep(5)
                             correct = 0
                             for i in range(0, 3):
                                 question = random.choice(questions)
@@ -158,7 +198,7 @@ while run:
                                                 text_box = font.render(text, False, (0, 0, 0), wraplength=900)
                                                 screen.blit(text_box, (600, 200))
                                                 pygame.display.flip()
-                                                time.sleep(3)
+                                                time.sleep(5)
                                                 question_loop = False
 
                                     if question_loop:
@@ -219,15 +259,18 @@ while run:
                             text_box = font.render(text, False, (0, 0, 0), wraplength=900)
                             screen.blit(text_box, (600, 200))
                             pygame.display.flip()
-                            time.sleep(3)
+                            time.sleep(5)
 
                                 
                 scroll = True
             if event.button == 4:
-                player.zoom += zoom
+                if player.zoom < 2:
+                    player.zoom += zoom
                
             elif event.button == 5:
-                player.zoom -= zoom
+                if player.zoom > 1.2:
+                    player.zoom -= zoom
+        
 
 
         elif event.type == pygame.MOUSEBUTTONUP:
@@ -266,7 +309,8 @@ while run:
 
     if len(plants) == 0:
         pass
-
+    
+    print(player.zoom)
     pygame.display.flip()
 
 
