@@ -1,3 +1,6 @@
+import json
+import numpy as np
+from PIL import Image
 import pygame
 
 class Map:
@@ -15,7 +18,14 @@ class Map:
         self.player = player
 
         self.cache = {}
-    
+
+        image = Image.open("assets\\map.png").convert("RGB")
+        self.matrix = np.array(image).tolist()
+        
+        with open("biomes.json", 'r') as f:
+            self.biomes = json.load(f)
+
+            
     def render(self):
         width = int(self.rect.width * self.player.zoom)
         height = int(self.rect.height * self.player.zoom)

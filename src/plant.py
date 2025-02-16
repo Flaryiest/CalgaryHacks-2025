@@ -7,8 +7,8 @@ class Plant:
 
         self.image = pygame.image.load("assets\\factory.png")
         self.image = pygame.transform.scale(self.image, (100, 100))
-        self.width, self.height = pygame.display.get_surface().get_size()
         self.rect = self.image.get_rect()
+        self.width, self.height = pygame.display.get_surface().get_size()
         self.x, self.y = x, y
     
     def render(self):
@@ -18,6 +18,8 @@ class Plant:
         zoomed_x = (self.x * self.player.zoom) + offset_x
         zoomed_y = (self.y * self.player.zoom) + offset_y
 
-        scaled_image = pygame.transform.scale(self.image, (int(100 * self.player.zoom // 2), int(100 * self.player.zoom // 2)))
+        scale = int(150 * self.player.zoom // 2)
+        scaled_image = pygame.transform.scale(self.image, (scale, scale))
+        self.rect = pygame.Rect(zoomed_x, zoomed_y, scale, scale)
 
         self.screen.blit(scaled_image, (zoomed_x, zoomed_y))

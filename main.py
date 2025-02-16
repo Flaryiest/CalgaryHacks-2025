@@ -18,7 +18,14 @@ zoom = 0.1
 run = True
 scroll = False
 
-plants = [Plant(player, screen, random.randint(0, 1920), random.randint(0, 1080)) for i in range(0, 10)]
+plants = []
+for biome in map.biomes:
+    if not biome == "ocean":
+        for i in range(0, 2):
+            coordinates = random.choice(map.biomes[biome])
+            plants.append(Plant(player, screen, coordinates[0] * 1.6, coordinates[1] * 1.6))
+
+hover = {"status": False, "obj": None}
 
 while run: 
     for event in pygame.event.get(): 
@@ -26,7 +33,11 @@ while run:
             run = False
 
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            if event.button == 2:
+            if event.button in [1, 2]:
+                if event.button == 1:
+                    for plant in plants:
+                        if plant.rect.collidepoint(pygame.mouse.get_pos()):
+                            print("clicked")
                 scroll = True
             if event.button == 4:
                 player.zoom += zoom
@@ -36,9 +47,8 @@ while run:
 
 
         elif event.type == pygame.MOUSEBUTTONUP:
-            if event.button == 2:
+            if event.button in [1, 2]:
                 scroll = False
-                zoomIncrement = 0.1
 
         elif event.type == pygame.MOUSEMOTION:
             if scroll:
@@ -59,12 +69,10 @@ while run:
     if player.y > player.height:
         player.y = player.height
                     
-    screen.fill((0, 105, 170))
+    screen.fill((0, 91, 171))
     map.render()
 
     for plant in plants:
-        if plant.rect.collidepoint(pygame.mouse.get_pos()):
-            print(random.randint(0, 100))
         plant.render()
 
     pygame.display.flip()
