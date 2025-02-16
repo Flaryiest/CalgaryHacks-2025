@@ -179,7 +179,7 @@ class MenuSecondary:
 
             pygame.display.flip()  # Update the screen
             clock.tick(30)  # Limit the frame rate to 30 FPS
-
+'''
 # Initialize pygame
 pygame.init()
 screen = pygame.display.set_mode((800, 600))
@@ -192,3 +192,4 @@ menu_icon_notpressed = pygame.transform.scale(menu_icon_notpressed, (50, 50))
 
 menu = MenuSecondary()
 menu.gameLoop(screen, clock, menu_icon_pressed, menu_icon_notpressed)
+'''
