@@ -5,13 +5,36 @@ logging.basicConfig(level=logging.DEBUG)
 
 settings = Settings()
 
-if settings.settings["fullscreen"] == True:
+if settings.settings["fullscreen"]:
     screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+    screen_width, screen_height = screen.get_size()
 else:
-    screen = pygame.display.set_mode((settings.settings["width"], settings.settings["height"]))
+    screen_width = settings.settings["width"]
+    screen_height = settings.settings["height"]
+    screen = pygame.display.set_mode((screen_width, screen_height))
 
 pygame.display.set_caption("Save the Animals!!!") 
 
+def fade_in():
+
+
+    alpha = 0
+    fade_surface = pygame.image.load("assets/Coverpage.jpg").convert()
+    fade_surface = pygame.transform.scale(fade_surface, (screen_width, screen_height))
+    fade_surface.set_alpha(alpha)
+
+
+    while alpha < 255:
+        screen.fill((0, 0, 0))
+        alpha += 5  
+        fade_surface.set_alpha(alpha)
+        screen.blit(fade_surface, (0, 0))
+        pygame.display.update()
+        pygame.time.delay(50)
+        if alpha >= 255:
+            break
+
+fade_in()
 player = Player(screen)
 map = Map(screen, player)
 zoom = 0.1
@@ -78,7 +101,7 @@ while run:
                             img = pygame.image.load(image)
                             img = pygame.transform.scale(img, (800, 800))
                             
-                            text_box = font.render(text, False, (0, 0, 0), wraplength=900)
+                            text_box = font.render(text, False, (0, 0, 0)) # Removed Wraplength Argument as was crashing 
                             screen.blit(text_box, (600, 200))
                             screen.blit(img, (1200, 400))
 
