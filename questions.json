@@ -1,0 +1,188 @@
+[
+    {
+        "question": "What is the primary greenhouse gas responsible for climate change?",
+        "answers": ["Carbon Dioxide (CO2)", "Methane (CH4)", "Nitrous Oxide (N2O)", "Water Vapor (H2O)"],
+        "correct_answer": "Carbon Dioxide (CO2)",
+        "explanation": "Carbon dioxide is the primary greenhouse gas emitted through human activities, such as burning fossil fuels, deforestation, and industrial processes. It traps heat in the atmosphere, contributing significantly to global warming."
+    },
+    {
+        "question": "Which of the following animals is most threatened by melting Arctic ice due to climate change?",
+        "answers": ["Polar Bears", "Penguins", "Sea Turtles", "Walruses"],
+        "correct_answer": "Polar Bears",
+        "explanation": "Polar bears rely on Arctic sea ice to hunt seals, their primary food source. As the ice melts due to rising temperatures, polar bears face habitat loss and food scarcity, making them highly vulnerable."
+    },
+    {
+        "question": "How does climate change affect coral reefs?",
+        "answers": ["Ocean Acidification", "Increased Water Temperature", "Sea Level Rise", "All of the Above"],
+        "correct_answer": "All of the Above",
+        "explanation": "Climate change impacts coral reefs through ocean acidification (reduced pH levels), rising sea temperatures (causing coral bleaching), and sea level rise (altering light availability for photosynthesis). These factors collectively threaten coral reef ecosystems."
+    },
+    {
+        "question": "What percentage of the world's species could face extinction due to climate change by 2100?",
+        "answers": ["10%", "25%", "50%", "75%"],
+        "correct_answer": "25%",
+        "explanation": "Scientists estimate that up to 25% of the world's species could face extinction by 2100 if global temperatures continue to rise at the current rate. This is due to habitat loss, changing ecosystems, and increased competition for resources."
+    },
+    {
+        "question": "Which of the following is a major impact of climate change on bird populations?",
+        "answers": ["Changes in Migration Patterns", "Increased Nesting Success", "Longer Lifespans", "Reduced Predation"],
+        "correct_answer": "Changes in Migration Patterns",
+        "explanation": "Climate change alters the timing of seasons, affecting the availability of food and nesting sites. Many bird species are migrating earlier or shifting their ranges to adapt to these changes."
+    },
+    {
+        "question": "What is the term for the phenomenon where species move to higher altitudes or latitudes due to climate change?",
+        "answers": ["Species Migration", "Range Shift", "Habitat Expansion", "Ecological Drift"],
+        "correct_answer": "Range Shift",
+        "explanation": "Range shift refers to the movement of species to new areas, such as higher altitudes or latitudes, in response to changing climate conditions. This helps them find suitable habitats and resources."
+    },
+    {
+        "question": "Which marine animal is particularly vulnerable to climate change due to its reliance on sea ice for hunting?",
+        "answers": ["Seals", "Orcas", "Narwhals", "Penguins"],
+        "correct_answer": "Seals",
+        "explanation": "Seals, especially species like the ringed seal, depend on sea ice for resting, breeding, and hunting. Melting sea ice reduces their habitat and makes them more vulnerable to predators."
+    },
+    {
+        "question": "How does climate change affect the timing of plant flowering and animal breeding seasons?",
+        "answers": ["They occur earlier", "They occur later", "They remain unchanged", "They become unpredictable"],
+        "correct_answer": "They occur earlier",
+        "explanation": "Warmer temperatures cause plants to flower earlier and animals to breed sooner. This can lead to mismatches in ecosystems, such as pollinators emerging before flowers are available."
+    },
+    {
+        "question": "Which of the following is a consequence of ocean warming due to climate change?",
+        "answers": ["Coral Bleaching", "Increased Fish Populations", "Stronger Ocean Currents", "More Oxygen in Water"],
+        "correct_answer": "Coral Bleaching",
+        "explanation": "Ocean warming causes coral bleaching, where corals expel the algae living in their tissues, turning white. Without algae, corals lose their primary food source and become more susceptible to disease."
+    },
+    {
+        "question": "What is the main cause of deforestation contributing to climate change?",
+        "answers": ["Agricultural Expansion", "Urban Development", "Mining Activities", "Natural Disasters"],
+        "correct_answer": "Agricultural Expansion",
+        "explanation": "Agricultural expansion, particularly for livestock grazing and crop production, is the leading cause of deforestation. Trees store carbon, and their removal releases CO2 into the atmosphere, exacerbating climate change."
+    },
+    {
+        "question": "Which of the following is a keystone species affected by climate change in the Arctic?",
+        "answers": ["Arctic Fox", "Snowy Owl", "Polar Bear", "Caribou"],
+        "correct_answer": "Polar Bear",
+        "explanation": "Polar bears are a keystone species in the Arctic. Their decline due to melting sea ice disrupts the entire ecosystem, as they play a crucial role in maintaining the balance of species in their habitat."
+    },
+    {
+        "question": "How does climate change impact the availability of freshwater for wildlife?",
+        "answers": ["Decreased Availability", "Increased Availability", "No Impact", "Seasonal Variability Only"],
+        "correct_answer": "Decreased Availability",
+        "explanation": "Climate change alters precipitation patterns, leading to droughts in some regions. This reduces the availability of freshwater, affecting wildlife that depends on rivers, lakes, and wetlands."
+    },
+    {
+        "question": "Which of the following is a major threat to amphibians due to climate change?",
+        "answers": ["Disease Spread", "Habitat Loss", "Increased Predation", "All of the Above"],
+        "correct_answer": "All of the Above",
+        "explanation": "Amphibians are highly sensitive to environmental changes. Climate change increases disease spread, causes habitat loss, and alters predator-prey dynamics, making them one of the most vulnerable groups."
+    },
+    {
+        "question": "What is the term for the process by which species adapt to changing environmental conditions over time?",
+        "answers": ["Evolution", "Adaptation", "Speciation", "Natural Selection"],
+        "correct_answer": "Adaptation",
+        "explanation": "Adaptation refers to the process by which species develop traits that help them survive in changing environmental conditions. This can occur over generations through natural selection."
+    },
+    {
+        "question": "Which of the following is a major impact of climate change on insect populations?",
+        "answers": ["Increased Diversity", "Range Expansion", "Decreased Reproduction Rates", "Reduced Lifespans"],
+        "correct_answer": "Range Expansion",
+        "explanation": "Warmer temperatures allow insects to expand their ranges to higher altitudes and latitudes. This can lead to the spread of pests and diseases, affecting ecosystems and agriculture."
+    },
+    {
+        "question": "How does climate change affect the distribution of invasive species?",
+        "answers": ["Increases Their Spread", "Decreases Their Spread", "No Impact", "Makes Them Extinct"],
+        "correct_answer": "Increases Their Spread",
+        "explanation": "Climate change creates favorable conditions for invasive species to thrive and spread. Warmer temperatures and altered ecosystems allow them to outcompete native species."
+    },
+    {
+        "question": "Which of the following is a major impact of climate change on marine ecosystems?",
+        "answers": ["Ocean Acidification", "Sea Level Rise", "Increased Storm Intensity", "All of the Above"],
+        "correct_answer": "All of the Above",
+        "explanation": "Climate change affects marine ecosystems through ocean acidification, rising sea levels, and more intense storms. These changes disrupt habitats, food webs, and the survival of marine species."
+    },
+    {
+        "question": "What is the primary cause of rising sea levels due to climate change?",
+        "answers": ["Melting Ice Caps", "Thermal Expansion of Seawater", "Increased Rainfall", "Both A and B"],
+        "correct_answer": "Both A and B",
+        "explanation": "Rising sea levels are primarily caused by the melting of ice caps and glaciers, as well as the thermal expansion of seawater as it warms. Both factors contribute to the inundation of coastal areas."
+    },
+    {
+        "question": "Which of the following is a major impact of climate change on forest ecosystems?",
+        "answers": ["Increased Wildfires", "Deforestation", "Loss of Biodiversity", "All of the Above"],
+        "correct_answer": "All of the Above",
+        "explanation": "Climate change increases the frequency and intensity of wildfires, accelerates deforestation, and leads to the loss of biodiversity. These changes threaten the health and stability of forest ecosystems."
+    },
+    {
+        "question": "How does climate change affect the reproductive success of sea turtles?",
+        "answers": ["Higher Nest Temperatures Reduce Hatching Success", "Increased Predation on Nests", "Loss of Nesting Beaches", "All of the Above"],
+        "correct_answer": "All of the Above",
+        "explanation": "Climate change impacts sea turtles by increasing nest temperatures (which skews sex ratios and reduces hatching success), increasing predation, and causing the loss of nesting beaches due to rising sea levels."
+    },
+    {
+        "question": "Which of the following is a major impact of climate change on fish populations?",
+        "answers": ["Changes in Migration Patterns", "Increased Disease Susceptibility", "Habitat Loss", "All of the Above"],
+        "correct_answer": "All of the Above",
+        "explanation": "Climate change affects fish populations by altering migration patterns, increasing their susceptibility to diseases, and causing habitat loss due to warming waters and ocean acidification."
+    },
+    {
+        "question": "What is the term for the process by which species become extinct due to climate change?",
+        "answers": ["Climate Extinction", "Habitat Extinction", "Anthropogenic Extinction", "Background Extinction"],
+        "correct_answer": "Climate Extinction",
+        "explanation": "Climate extinction refers to the loss of species directly caused by climate change, including habitat loss, changing ecosystems, and the inability of species to adapt quickly enough."
+    },
+    {
+        "question": "Which of the following is a major impact of climate change on Arctic wildlife?",
+        "answers": ["Loss of Sea Ice", "Changes in Food Availability", "Increased Human Activity", "All of the Above"],
+        "correct_answer": "All of the Above",
+        "explanation": "Arctic wildlife is heavily impacted by the loss of sea ice, changes in food availability, and increased human activity such as shipping and resource extraction. These factors threaten their survival."
+    },
+    {
+        "question": "How does climate change affect the behavior of pollinators like bees?",
+        "answers": ["Changes in Flowering Times", "Increased Predation", "Habitat Loss", "All of the Above"],
+        "correct_answer": "All of the Above",
+        "explanation": "Climate change disrupts the behavior of pollinators by altering flowering times, increasing predation risks, and causing habitat loss. This affects their ability to find food and reproduce."
+    },
+    {
+        "question": "Which of the following is a major impact of climate change on migratory birds?",
+        "answers": ["Changes in Migration Timing", "Loss of Stopover Habitats", "Increased Predation", "All of the Above"],
+        "correct_answer": "All of the Above",
+        "explanation": "Migratory birds are affected by changes in migration timing, loss of stopover habitats, and increased predation due to climate change. These factors disrupt their life cycles and reduce survival rates."
+    },
+    {
+        "question": "What is the term for the process by which species move to new areas due to climate change?",
+        "answers": ["Range Shift", "Migration", "Dispersal", "Colonization"],
+        "correct_answer": "Range Shift",
+        "explanation": "Range shift refers to the movement of species to new areas, such as higher altitudes or latitudes, in response to changing climate conditions. This helps them find suitable habitats and resources."
+    },
+    {
+        "question": "Which of the following is a major impact of climate change on freshwater ecosystems?",
+        "answers": ["Increased Water Temperature", "Changes in Water Flow", "Loss of Habitat", "All of the Above"],
+        "correct_answer": "All of the Above",
+        "explanation": "Climate change impacts freshwater ecosystems by increasing water temperatures, altering water flow patterns, and causing habitat loss. These changes threaten the survival of freshwater species."
+    },
+    {
+        "question": "How does climate change affect the distribution of plant species?",
+        "answers": ["Shifts to Higher Altitudes", "Shifts to Higher Latitudes", "Changes in Flowering Times", "All of the Above"],
+        "correct_answer": "All of the Above",
+        "explanation": "Climate change causes plant species to shift their ranges to higher altitudes and latitudes and alters their flowering times. These changes can disrupt ecosystems and species interactions."
+    },
+    {
+        "question": "Which of the following is a major impact of climate change on marine mammals?",
+        "answers": ["Loss of Sea Ice", "Changes in Prey Availability", "Increased Disease Risk", "All of the Above"],
+        "correct_answer": "All of the Above",
+        "explanation": "Marine mammals are affected by the loss of sea ice, changes in prey availability, and increased disease risks due to climate change. These factors threaten their survival and reproductive success."
+    },
+    {
+        "question": "What is the term for the process by which species adapt to changing environmental conditions over time?",
+        "answers": ["Evolution", "Adaptation", "Speciation", "Natural Selection"],
+        "correct_answer": "Adaptation",
+        "explanation": "Adaptation refers to the process by which species develop traits that help them survive in changing environmental conditions. This can occur over generations through natural selection."
+    },
+    {
+        "question": "Which of the following is a major impact of climate change on reptiles?",
+        "answers": ["Changes in Nesting Sites", "Increased Predation", "Habitat Loss", "All of the Above"],
+        "correct_answer": "All of the Above",
+        "explanation": "Reptiles are affected by climate change through changes in nesting sites, increased predation, and habitat loss. These factors threaten their survival and reproductive success."
+    }
+]

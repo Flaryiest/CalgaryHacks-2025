@@ -73,6 +73,10 @@ while run:
     map.render()
 
     for plant in plants:
+        if plant.rect.collidepoint(pygame.mouse.get_pos()):
+            plant.multiplier = 1.1
+        else:
+            plant.multiplier = 1
         plant.render()
 
     pygame.display.flip()

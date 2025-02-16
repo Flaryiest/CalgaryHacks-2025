@@ -10,6 +10,7 @@ class Plant:
         self.rect = self.image.get_rect()
         self.width, self.height = pygame.display.get_surface().get_size()
         self.x, self.y = x, y
+        self.multiplier = 1
     
     def render(self):
         offset_x = (self.width // 2) - (self.player.x * self.player.zoom)
@@ -18,7 +19,7 @@ class Plant:
         zoomed_x = (self.x * self.player.zoom) + offset_x
         zoomed_y = (self.y * self.player.zoom) + offset_y
 
-        scale = int(150 * self.player.zoom // 2)
+        scale = int(150 * self.player.zoom // 2) * self.multiplier
         scaled_image = pygame.transform.scale(self.image, (scale, scale))
         self.rect = pygame.Rect(zoomed_x, zoomed_y, scale, scale)
 
