@@ -70,9 +70,11 @@ mixer.music.set_volume(0.5)
   
 mixer.music.play(-1) 
 
-def fade_in(asset="assets/Coverpage.jpg"):
+def fade_in(asset="assets/Coverpage.jpg", asset2="assets/Cover Text (1).png"):
     alpha = 0
     fade_surface = pygame.image.load(asset).convert()
+    fade_surface = pygame.transform.scale(fade_surface, (screen_width, screen_height))
+    fade_surface = pygame.image.load(asset2).convert()
     fade_surface = pygame.transform.scale(fade_surface, (screen_width, screen_height))
     fade_surface.set_alpha(alpha)
 
