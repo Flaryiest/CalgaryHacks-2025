@@ -1,11 +1,7 @@
 from src import *
-import pygame, logging, random
-from src.menu import MenuSecondary
-import time, json
-logging.basicConfig(level=logging.DEBUG)
+import pygame, logging, random, time, json
 
-pygame.init()
-pygame.font.init()
+logging.basicConfig(level=logging.DEBUG)
 
 settings = Settings()
 
@@ -14,17 +10,8 @@ if settings.settings["fullscreen"] == True:
 else:
     screen = pygame.display.set_mode((settings.settings["width"], settings.settings["height"]))
 
-pygame.display.set_caption("Save the Animals!!!")
+pygame.display.set_caption("Save the Animals!!!") 
 
-menu = MenuSecondary()
-menu_icon_pressed = pygame.image.load("assets/menu assets/Button 1, Pressed.png")
-menu_icon_pressed = pygame.transform.scale(menu_icon_pressed, (50, 50))
-menu_icon_notpressed = pygame.image.load("assets/menu assets/Button 1, Unpressed.png")
-menu_icon_notpressed = pygame.transform.scale(menu_icon_notpressed, (50, 50))
-
-clock = pygame.time.Clock()
-
-# Main game loop
 player = Player(screen)
 map = Map(screen, player)
 zoom = 0.1
@@ -56,11 +43,11 @@ button_rect2 = pygame.Rect(100, 800, button.get_width(), button.get_height())  #
 button_rect3 = pygame.Rect(850, 600, button.get_width(), button.get_height())  # Button 3
 button_rect4 = pygame.Rect(850, 800, button.get_width(), button.get_height())  # Button 4
 
-with open("questions.json", 'r') as f:
-    questions = json.load(f)
 
-while run:
-    for event in pygame.event.get():
+with open("questions.json", "r") as f:
+    questions = json.load(f)
+while run: 
+    for event in pygame.event.get(): 
         if event.type == pygame.QUIT:
             run = False
 
@@ -223,77 +210,40 @@ while run:
             if event.button in [1, 2]:
                 scroll = False
 
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if menu_icon_notpressed.get_rect(topleft=(20, 20)).collidepoint(event.pos) or menu_icon_pressed.get_rect(topleft=(20, 20)).collidepoint(event.pos):
-                menu.menu_open = not menu.menu_open
-            if menu.menu_open:
-                menu.handleMouseClick(event.pos, screen)
         elif event.type == pygame.MOUSEMOTION:
-            if menu.menu_open and menu.dragging:
-                menu.handleMouseDrag(event.pos)
-        elif event.type == pygame.MOUSEBUTTONUP:
-            menu.dragging = False
+            if scroll:
+                rel_x, rel_y = event.rel
 
-        if not menu.menu_open:
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if event.button in [1, 2]:
-                    if event.button == 1:
-                        for plant in plants:
-                            if plant.rect.collidepoint(pygame.mouse.get_pos()):
-                                background = screen.copy()
-                                while True:
-                                    screen.blit(background, (0, 0))
-                                    pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(map.width // 2 - 450, 300, 900, 300))
-                                    screen.blit(dialogue, (map.width // 2 - 450, 300))
-                                    pygame.display.flip()
-                    scroll = True
-                if event.button == 4:
-                    player.zoom += zoom
-                elif event.button == 5:
-                    player.zoom -= zoom
-            elif event.type == pygame.MOUSEBUTTONUP:
-                if event.button in [1, 2]:
-                    scroll = False
-            elif event.type == pygame.MOUSEMOTION:
-                if scroll:
-                    rel_x, rel_y = event.rel
-                    player.x -= rel_x
-                    player.y -= rel_y
+                player.x -= rel_x
+                player.y -= rel_y
 
-    if not menu.menu_open:
-        if player.x < 0:
-            player.x = 0
-        if player.x > player.width:
-            player.x = player.width
-        if player.y < 0:
-            player.y = 0
-        if player.y > player.height:
-            player.y = player.height
+    if player.x < 0:
+        player.x = 0
+    
+    if player.x > player.width:
+        player.x = player.width
 
-        screen.fill((0, 91, 171))
-        map.render()
+    if player.y < 0:
+        player.y = 0
+    
+    if player.y > player.height:
+        player.y = player.height
+                    
+    screen.fill((0, 91, 171))
+    map.render()
 
-        for plant in plants:
-            if plant.rect.collidepoint(pygame.mouse.get_pos()):
-                plant.multiplier = 1.1
-            else:
-                plant.multiplier = 1
-            plant.render()
+    for plant in plants:
+        if plant.rect.collidepoint(pygame.mouse.get_pos()):
+            plant.multiplier = 1.1
+        else:
+            plant.multiplier = 1
+        plant.render()
 
-    if menu.menu_open:
-        menu.loadAndPlayAudio()
-    else:
-        menu.stopAudio()
 
-    menu_icon = menu_icon_pressed if menu.menu_open else menu_icon_notpressed
-    menu.drawMenuIcon(screen, menu_icon)
-
-    if menu.menu_open:
-        screen_width, screen_height = screen.get_size()
-        menu.drawMenu(screen, menu.menu_x, menu.loadMenuBackground(screen_width, screen_height), screen_width, screen_height)
+    if len(plants) == 0:
+        pass
 
     pygame.display.flip()
-    clock.tick(30)
 
 
 
