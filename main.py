@@ -15,7 +15,7 @@ else:
     screen_height = settings.settings["height"]
     screen = pygame.display.set_mode((screen_width, screen_height))
 
-pygame.display.set_caption("Save the Animals!!!") 
+pygame.display.set_caption("Save the Animals!!!")
 
 player = Player(screen)
 map = Map(screen, player)
@@ -28,10 +28,28 @@ for biome in map.biomes:
     for i in range(0, 2):
         coordinates = random.choice(map.biomes[biome])
         if biome == "ocean":
-            plants.append(Plant(player, screen, coordinates[0] * 1.6, coordinates[1] * 1.6, dir="assets\\pump.png", scale=4, biome=biome))
+            plants.append(
+                Plant(
+                    player,
+                    screen,
+                    coordinates[0] * 1.6,
+                    coordinates[1] * 1.6,
+                    dir="assets\\pump.png",
+                    scale=4,
+                    biome=biome,
+                )
+            )
         else:
             print(biome)
-            plants.append(Plant(player, screen, coordinates[0] * 1.6, coordinates[1] * 1.6, biome=biome))
+            plants.append(
+                Plant(
+                    player,
+                    screen,
+                    coordinates[0] * 1.6,
+                    coordinates[1] * 1.6,
+                    biome=biome,
+                )
+            )
 
 hover = {"status": False, "obj": None}
 dialogue = pygame.image.load("assets\\dialogue.png")
@@ -39,7 +57,7 @@ dialogue = pygame.transform.scale(dialogue, (1500, 1000))
 pygame.font.init()
 font = pygame.font.Font('assets\\Fonts\\TepidTerminalFont_v231106\\TepidTerminal.ttf', 32)
 overlay = pygame.Surface((1920, 1080), pygame.SRCALPHA)  # Enable per-pixel alpha
-overlay.fill((0, 0, 0, 128)) 
+overlay.fill((0, 0, 0, 128))
 button = pygame.image.load("assets\\button.png")
 button = pygame.transform.scale(button, (800, 200))
 
@@ -51,22 +69,21 @@ mixer.music.play(-1)
 
 def fade_in():
 
-
     alpha = 0
     fade_surface = pygame.image.load("assets/Coverpage.jpg").convert()
     fade_surface = pygame.transform.scale(fade_surface, (screen_width, screen_height))
     fade_surface.set_alpha(alpha)
 
-
     while alpha < 255:
         screen.fill((0, 0, 0))
-        alpha += 5  
+        alpha += 5
         fade_surface.set_alpha(alpha)
         screen.blit(fade_surface, (0, 0))
         pygame.display.update()
         pygame.time.delay(50)
         if alpha >= 255:
             break
+
 
 fade_in()
 start_button = pygame.Rect(1920 // 2 - 300, 600, button.get_width(), button.get_height())  # Button 1
@@ -110,8 +127,8 @@ button_rect4 = pygame.Rect(850, 800, button.get_width(), button.get_height())  #
 
 with open("questions.json", "r") as f:
     questions = json.load(f)
-while run: 
-    for event in pygame.event.get(): 
+while run:
+    for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
 
@@ -120,7 +137,7 @@ while run:
                 if event.button == 1:
                     for plant in plants:
                         if plant.rect.collidepoint(pygame.mouse.get_pos()):
-                            
+
                             background = screen.copy()
                             screen.blit(background, (0, 0))
                             screen.blit(overlay, (0, 0))
@@ -141,8 +158,10 @@ while run:
 
                             img = pygame.image.load(image)
                             img = pygame.transform.scale(img, (800, 800))
-                            
-                            text_box = font.render(text, False, (0, 0, 0), wraplength=900)
+
+                            text_box = font.render(
+                                text, False, (0, 0, 0), wraplength=900
+                            )
                             screen.blit(text_box, (600, 200))
                             screen.blit(img, (1200, 400))
 
@@ -152,10 +171,18 @@ while run:
                             correct = 0
                             for i in range(0, 3):
                                 question = random.choice(questions)
-                                button1_text = font.render(question["answers"][0], True, (0, 0, 0))  # Black text
-                                button2_text = font.render(question["answers"][1], True, (0, 0, 0))  # Black text
-                                button3_text = font.render(question["answers"][2], True, (0, 0, 0))  # Black text
-                                button4_text = font.render(question["answers"][3], True, (0, 0, 0))  # Black text
+                                button1_text = font.render(
+                                    question["answers"][0], True, (0, 0, 0)
+                                )  # Black text
+                                button2_text = font.render(
+                                    question["answers"][1], True, (0, 0, 0)
+                                )  # Black text
+                                button3_text = font.render(
+                                    question["answers"][2], True, (0, 0, 0)
+                                )  # Black text
+                                button4_text = font.render(
+                                    question["answers"][3], True, (0, 0, 0)
+                                )  # Black text
 
                                 correct_answer = question["correct_answer"]
                                 question_loop = True
@@ -167,25 +194,43 @@ while run:
                                         elif event.type == pygame.MOUSEBUTTONDOWN:
                                             if event.button == 1:
                                                 if button_rect1.collidepoint(event.pos):
-                                                    if question["answers"][0] == correct_answer:
+                                                    if (
+                                                        question["answers"][0]
+                                                        == correct_answer
+                                                    ):
                                                         text = f"Correct! {question['explanation']}"
                                                         correct += 1
                                                     else:
                                                         text = f"Incorrect! {question['explanation']}"
-                                                elif button_rect2.collidepoint(event.pos):
-                                                    if question["answers"][1] == correct_answer:
+                                                elif button_rect2.collidepoint(
+                                                    event.pos
+                                                ):
+                                                    if (
+                                                        question["answers"][1]
+                                                        == correct_answer
+                                                    ):
                                                         text = f"Correct! {question['explanation']}"
                                                         correct += 1
                                                     else:
                                                         text = f"Incorrect! {question['explanation']}"
-                                                elif button_rect3.collidepoint(event.pos):
-                                                    if question["answers"][2] == correct_answer:
+                                                elif button_rect3.collidepoint(
+                                                    event.pos
+                                                ):
+                                                    if (
+                                                        question["answers"][2]
+                                                        == correct_answer
+                                                    ):
                                                         text = f"Correct! {question['explanation']}"
                                                         correct += 1
                                                     else:
                                                         text = f"Incorrect! {question['explanation']}"
-                                                elif button_rect4.collidepoint(event.pos):
-                                                    if question["answers"][3] == correct_answer:
+                                                elif button_rect4.collidepoint(
+                                                    event.pos
+                                                ):
+                                                    if (
+                                                        question["answers"][3]
+                                                        == correct_answer
+                                                    ):
                                                         text = f"Correct! {question['explanation']}"
                                                         correct += 1
                                                     else:
@@ -193,9 +238,17 @@ while run:
 
                                                 screen.blit(background, (0, 0))
                                                 screen.blit(overlay, (0, 0))
-                                                screen.blit(dialogue, (map.width // 2 - 600, -150))
+                                                screen.blit(
+                                                    dialogue,
+                                                    (map.width // 2 - 600, -150),
+                                                )
                                                 screen.blit(img, (1200, 400))
-                                                text_box = font.render(text, False, (0, 0, 0), wraplength=900)
+                                                text_box = font.render(
+                                                    text,
+                                                    False,
+                                                    (0, 0, 0),
+                                                    wraplength=900,
+                                                )
                                                 screen.blit(text_box, (600, 200))
                                                 pygame.display.flip()
                                                 time.sleep(5)
@@ -204,25 +257,52 @@ while run:
                                     if question_loop:
                                         screen.blit(background, (0, 0))
                                         screen.blit(overlay, (0, 0))
-                                        screen.blit(dialogue, (map.width // 2 - 600, -150))
+                                        screen.blit(
+                                            dialogue, (map.width // 2 - 600, -150)
+                                        )
 
-                                        text_box = font.render(question["question"], False, (0, 0, 0), wraplength=900)
+                                        text_box = font.render(
+                                            question["question"],
+                                            False,
+                                            (0, 0, 0),
+                                            wraplength=900,
+                                        )
                                         screen.blit(text_box, (600, 200))
 
-                                        screen.blit(button, button_rect1.topleft)  # Button 1
-                                        
-                                        screen.blit(button, button_rect2.topleft)  # Button 2
-                                        screen.blit(button, button_rect3.topleft)  # Button 3
-                                        screen.blit(button, button_rect4.topleft)  # Button 4
+                                        screen.blit(
+                                            button, button_rect1.topleft
+                                        )  # Button 1
+
+                                        screen.blit(
+                                            button, button_rect2.topleft
+                                        )  # Button 2
+                                        screen.blit(
+                                            button, button_rect3.topleft
+                                        )  # Button 3
+                                        screen.blit(
+                                            button, button_rect4.topleft
+                                        )  # Button 4
 
                                         # Draw text on top of the buttons
-                                        screen.blit(button1_text, (button_rect1.x + 50, button_rect1.y + 75))  # Adjust position as needed
-                                        screen.blit(button2_text, (button_rect2.x + 50, button_rect2.y + 75))  # Adjust position as needed
-                                        screen.blit(button3_text, (button_rect3.x + 50, button_rect3.y + 75))  # Adjust position as needed
-                                        screen.blit(button4_text, (button_rect4.x + 50, button_rect4.y + 75))  # Adjust position as needed                      
-                                    
+                                        screen.blit(
+                                            button1_text,
+                                            (button_rect1.x + 50, button_rect1.y + 75),
+                                        )  # Adjust position as needed
+                                        screen.blit(
+                                            button2_text,
+                                            (button_rect2.x + 50, button_rect2.y + 75),
+                                        )  # Adjust position as needed
+                                        screen.blit(
+                                            button3_text,
+                                            (button_rect3.x + 50, button_rect3.y + 75),
+                                        )  # Adjust position as needed
+                                        screen.blit(
+                                            button4_text,
+                                            (button_rect4.x + 50, button_rect4.y + 75),
+                                        )  # Adjust position as needed
+
                                         pygame.display.flip()
-                            
+
                             if correct >= 3:
                                 if plant.biome == "grass":
                                     text = "Moo-velous job, human! Thanks to you, the grass is greener, the air is cleaner, and the cows are doing a happy dance. Mother Nature is proud of you for shutting down that oil power plant. You’ve turned a cow-tastrophe into a cow-mendous victory!"
@@ -237,7 +317,7 @@ while run:
                                     text = "Sand-sational effort, wanderer! You’ve stopped the oil operation from sucking the desert dry and poisoning the little water we have. The desert is thriving again, and even the camels are smiling. You’ve made the sands of time a little cleaner!"
                                     image = "assets\\camel.png"
                                 plants.remove(plant)
-                            
+
                             else:
                                 if plant.biome == "grass":
                                     text = "Moo-ve it along, human! You gave it a good try, but that oil power plant is still causing trouble. Don’t let this cow-tastrophe get you down—Mother Nature believes in you! Take a deep breath and try again. You’ve got this!"
@@ -256,12 +336,13 @@ while run:
                             screen.blit(overlay, (0, 0))
                             screen.blit(dialogue, (map.width // 2 - 600, -150))
                             screen.blit(img, (1200, 400))
-                            text_box = font.render(text, False, (0, 0, 0), wraplength=900)
+                            text_box = font.render(
+                                text, False, (0, 0, 0), wraplength=900
+                            )
                             screen.blit(text_box, (600, 200))
                             pygame.display.flip()
                             time.sleep(5)
 
-                                
                 scroll = True
             if event.button == 4:
                 if player.zoom < 2:
@@ -271,7 +352,6 @@ while run:
                 if player.zoom > 1.2:
                     player.zoom -= zoom
         
-
 
         elif event.type == pygame.MOUSEBUTTONUP:
             if event.button in [1, 2]:
@@ -286,16 +366,16 @@ while run:
 
     if player.x < 0:
         player.x = 0
-    
+
     if player.x > player.width:
         player.x = player.width
 
     if player.y < 0:
         player.y = 0
-    
+
     if player.y > player.height:
         player.y = player.height
-                    
+
     screen.fill((0, 91, 171))
     map.render()
 
@@ -306,12 +386,8 @@ while run:
             plant.multiplier = 1
         plant.render()
 
-
     if len(plants) == 0:
         pass
     
     print(player.zoom)
     pygame.display.flip()
-
-
-

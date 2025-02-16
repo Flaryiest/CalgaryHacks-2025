@@ -1,5 +1,6 @@
 import pygame
 
+
 class Plant:
     def __init__(self, player, screen, x, y, biome, dir="assets\\factory.png", scale=1):
         self.player = player
@@ -13,7 +14,7 @@ class Plant:
         self.width, self.height = pygame.display.get_surface().get_size()
         self.x, self.y = x, y
         self.multiplier = 1
-    
+
     def render(self):
         offset_x = (self.width // 2) - (self.player.x * self.player.zoom)
         offset_y = (self.height // 2) - (self.player.y * self.player.zoom)
