@@ -20,13 +20,13 @@ scroll = False
 
 plants = []
 for biome in map.biomes:
-    if not biome == "ocean":
-        for i in range(0, 2):
-            coordinates = random.choice(map.biomes[biome])
-            plants.append(Plant(player, screen, coordinates[0] * 1.6, coordinates[1] * 1.6))
+    for i in range(0, 2):
+        coordinates = random.choice(map.biomes[biome])
+        plants.append(Plant(player, screen, coordinates[0] * 1.6, coordinates[1] * 1.6))
 
 hover = {"status": False, "obj": None}
-
+dialogue = pygame.image.load("assets\\dialogue.png")
+dialogue = pygame.transform.scale(dialogue, (900, 300))
 while run: 
     for event in pygame.event.get(): 
         if event.type == pygame.QUIT:
@@ -37,7 +37,14 @@ while run:
                 if event.button == 1:
                     for plant in plants:
                         if plant.rect.collidepoint(pygame.mouse.get_pos()):
-                            print("clicked")
+                            background = screen.copy()
+                            while True:
+                                screen.blit(background, (0, 0))
+                                pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(map.width // 2 - 450, 300, 900, 300))
+                                screen.blit(dialogue, (map.width // 2 - 450, 300))
+                                pygame.display.flip()
+
+                                
                 scroll = True
             if event.button == 4:
                 player.zoom += zoom
