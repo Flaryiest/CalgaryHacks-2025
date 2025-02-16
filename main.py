@@ -35,7 +35,11 @@ plants = []
 for biome in map.biomes:
     for i in range(0, 2):
         coordinates = random.choice(map.biomes[biome])
-        plants.append(Plant(player, screen, coordinates[0] * 1.6, coordinates[1] * 1.6))
+        if biome == "ocean":
+            plants.append(Plant(player, screen, coordinates[0] * 1.6, coordinates[1] * 1.6, dir="assets\\pump.png", scale=4, biome=biome))
+        else:
+            print(biome)
+            plants.append(Plant(player, screen, coordinates[0] * 1.6, coordinates[1] * 1.6, biome=biome))
 
 hover = {"status": False, "obj": None}
 dialogue = pygame.image.load("assets\\dialogue.png")
