@@ -1,11 +1,13 @@
 import pygame
 
 class Plant:
-    def __init__(self, player, screen, x, y):
+    def __init__(self, player, screen, x, y, biome, dir="assets\\factory.png", scale=1):
         self.player = player
         self.screen = screen
+        self.scale = scale
+        self.biome = biome
 
-        self.image = pygame.image.load("assets\\factory.png")
+        self.image = pygame.image.load(dir)
         self.image = pygame.transform.scale(self.image, (100, 100))
         self.rect = self.image.get_rect()
         self.width, self.height = pygame.display.get_surface().get_size()
@@ -19,7 +21,7 @@ class Plant:
         zoomed_x = (self.x * self.player.zoom) + offset_x
         zoomed_y = (self.y * self.player.zoom) + offset_y
 
-        scale = int(150 * self.player.zoom // 2) * self.multiplier
+        scale = int(150 * self.player.zoom // 2) * self.multiplier * self.scale
         scaled_image = pygame.transform.scale(self.image, (scale, scale))
         self.rect = pygame.Rect(zoomed_x, zoomed_y, scale, scale)
 
