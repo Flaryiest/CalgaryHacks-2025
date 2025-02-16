@@ -1,12 +1,14 @@
 import pygame
 import logging
 
-logging.basicConfig(level=logging.CRITICAL)
+logging.basicConfig(level=logging.DEBUG)
+logging.disable()
 
 class MenuSecondary:
     menu_open = False
     menu_x = -1000
     volume = 0.5
+    music_playing = False  # To track if music is already playing
 
     def loadMenuBackground(self):
         background = pygame.image.load("assets/menu assets/MenuSecondaryBackground.jpg")
@@ -59,6 +61,7 @@ class MenuSecondary:
         if button_x <= pos[0] <= button_x + button_width and button_y <= pos[1] <= button_y + button_height:
             logging.debug("Save Changes and Exit clicked")
             self.menu_open = False
+            self.stopAudio()  # Stop audio when menu is closed
 
         # "Restart Game" button bounds (adjusting the position)
         restart_button_y = 300  # Position for the "Restart Game" button
@@ -82,6 +85,20 @@ class MenuSecondary:
 
         # Additional restart logic can go here
 
+    def loadAndPlayAudio(self):
+        if not self.music_playing:  # Avoid loading the audio if it's already playing
+            pygame.mixer.music.load("Audio/Undertale OST 054 Hotel.mp3")  # Path to your audio file
+            pygame.mixer.music.set_volume(self.volume)  # Set the volume to current level
+            pygame.mixer.music.play(-1, 0.0)  # Loop indefinitely
+            self.music_playing = True
+            logging.debug("Menu music started playing")
+
+    def stopAudio(self):
+        if self.music_playing:
+            pygame.mixer.music.stop()  # Stop the music
+            self.music_playing = False
+            logging.debug("Menu music stopped")
+
     def gameLoop(self, screen, clock, menu_icon_pressed, menu_icon_notpressed):
         running = True
         background_image = self.loadMenuBackground()
@@ -101,6 +118,12 @@ class MenuSecondary:
                         self.handleMouseClick(event.pos) 
 
             self.menuToggle()
+
+            # Play music only when the menu is open
+            if self.menu_open:
+                self.loadAndPlayAudio()
+            else:
+                self.stopAudio()
 
             # Choose the appropriate icon based on the menu state (open or closed)
             menu_icon = menu_icon_pressed if self.menu_open else menu_icon_notpressed
