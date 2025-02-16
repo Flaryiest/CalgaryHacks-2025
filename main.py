@@ -18,6 +18,7 @@ else:
 pygame.display.set_caption("Save the Animals!!!")
 
 player = Player(screen)
+player.zoom = 1.4
 map = Map(screen, player)
 zoom = 0.1
 run = True
@@ -25,31 +26,33 @@ scroll = False
 
 plants = []
 for biome in map.biomes:
-    for i in range(0, 2):
-        coordinates = random.choice(map.biomes[biome])
-        if biome == "ocean":
-            plants.append(
-                Plant(
-                    player,
-                    screen,
-                    coordinates[0] * 1.6,
-                    coordinates[1] * 1.6,
-                    dir="assets\\pump.png",
-                    scale=4,
-                    biome=biome,
-                )
+
+    coordinates = random.choice(map.biomes[biome])
+    if biome == "ocean":
+        plants.append(
+            Plant(
+                player,
+                screen,
+                coordinates[0] * 1.6,
+                coordinates[1] * 1.6,
+                dir="assets\\pump.png",
+                scale=4,
+                biome=biome,
             )
-        else:
-            print(biome)
-            plants.append(
-                Plant(
-                    player,
-                    screen,
-                    coordinates[0] * 1.6,
-                    coordinates[1] * 1.6,
-                    biome=biome,
-                )
+        )
+    else:
+        print(biome)
+        plants.append(
+            Plant(
+                player,
+                screen,
+                coordinates[0] * 1.6,
+                coordinates[1] * 1.6,
+                biome=biome,
             )
+        )
+
+        
 
 hover = {"status": False, "obj": None}
 dialogue = pygame.image.load("assets\\dialogue.png")
@@ -67,10 +70,9 @@ mixer.music.set_volume(0.5)
   
 mixer.music.play(-1) 
 
-def fade_in():
-
+def fade_in(asset="assets/Coverpage.jpg"):
     alpha = 0
-    fade_surface = pygame.image.load("assets/Coverpage.jpg").convert()
+    fade_surface = pygame.image.load(asset).convert()
     fade_surface = pygame.transform.scale(fade_surface, (screen_width, screen_height))
     fade_surface.set_alpha(alpha)
 
@@ -97,9 +99,8 @@ while start:
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if event.button in [1, 2]:
                 if event.button == 1:
-                    for plant in plants:
-                        if start_button.collidepoint(pygame.mouse.get_pos()):
-                            start = False
+                    if start_button.collidepoint(pygame.mouse.get_pos()):
+                        start = False
 
     screen.blit(button, start_button.topleft)                          
     screen.blit(start_button_text, (start_button.x + 150, start_button.y + 75))
@@ -349,7 +350,7 @@ while run:
                     player.zoom += zoom
                
             elif event.button == 5:
-                if player.zoom > 1.2:
+                if player.zoom > 1.4:
                     player.zoom -= zoom
         
 
@@ -387,7 +388,9 @@ while run:
         plant.render()
 
     if len(plants) == 0:
-        pass
+        fade_in("assets\\sucess.png")
+        time.sleep(5)
+        run = False
     
     print(player.zoom)
     pygame.display.flip()
